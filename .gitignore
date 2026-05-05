@@ -1,0 +1,15 @@
+# OS
+Thumbs.db
+.DS_Store
+*.swp
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+.docker/
+
+# Temp
+*.tmp
+*.log

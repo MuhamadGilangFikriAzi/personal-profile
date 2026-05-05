@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhamad Gilang Fikri Azi � Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .float { animation: float 3s ease-in-out infinite; }
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+        .fade-in { animation: fadeInUp 0.6s ease-out forwards; }
+        .fade-in-delay-1 { animation-delay: 0.2s; opacity: 0; }
+        .fade-in-delay-2 { animation-delay: 0.4s; opacity: 0; }
+        .fade-in-delay-3 { animation-delay: 0.6s; opacity: 0; }
+        .skill-card:hover .skill-icon { transform: scale(1.1) rotate(-5deg); }
+        .skill-icon { transition: all 0.3s ease; }
+        .project-card { transition: all 0.3s ease; }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .gradient-text { background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .btn-primary { background: linear-gradient(135deg, #3b82f6, #2563eb); transition: all 0.3s ease; }
+        .btn-primary:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(59,130,246,0.4); }
+        .timeline-dot { box-shadow: 0 0 0 4px rgba(59,130,246,0.2); }
+    </style>
+</head>
+<body x-data="{ lang: 'id', mobileOpen: false, scrolled: false }" x-init="lang = localStorage.getItem('lang') || 'id'; window.addEventListener('scroll', () => scrolled = window.scrollY > 30); Alpine.effect(() => { try { Alpine.store('i18n').lang = Alpine.$data(document.body).lang; } catch(e) {} })">    <!-- LANG SWITCHER -->
+    <div class="fixed top-20 right-4 z-[100] flex gap-1 rounded-full p-1 shadow-sm border"
+         :class="scrolled ? 'bg-white/90 border-gray-200' : 'bg-white/10 border-white/20 backdrop-blur-md'">
+        <button @click="lang='id'; localStorage.setItem('lang','id')" :class="lang==='id' ? 'bg-blue-600 text-white shadow-sm' : (scrolled ? 'text-gray-500 hover:text-gray-800' : 'text-white/70 hover:text-white')" class="px-3 py-0.5 text-xs font-semibold rounded-full transition">ID</button>
+        <button @click="lang='en'; localStorage.setItem('lang','en')" :class="lang==='en' ? 'bg-blue-600 text-white shadow-sm' : (scrolled ? 'text-gray-500 hover:text-gray-800' : 'text-white/70 hover:text-white')" class="px-3 py-0.5 text-xs font-semibold rounded-full transition">EN</button>
+    </div>
+    <!-- NAVBAR -->
+    <nav
+         
+         :class="scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'"
+         class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6">
+        <div class="max-w-6xl mx-auto flex items-center justify-between h-16 md:h-20">
+            <a href="#" class="text-xl font-bold">
+                <span :class="scrolled ? 'text-gray-800' : 'text-white'" class="transition-colors">Gilang<span class="text-blue-500">.</span></span>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" :class="scrolled ? 'text-gray-600 hover:text-blue-600' : 'text-gray-200 hover:text-white'" class="text-sm font-medium transition"><span x-text="$t('nav.about')">About</span></a>
+                <a href="#skills" :class="scrolled ? 'text-gray-600 hover:text-blue-600' : 'text-gray-200 hover:text-white'" class="text-sm font-medium transition" x-text="$t('skills.label')">Skills</a>
+                <a href="#experience" :class="scrolled ? 'text-gray-600 hover:text-blue-600' : 'text-gray-200 hover:text-white'" class="text-sm font-medium transition" x-text="$t('exp.label')">Experience</a>
+                <a href="#projects" :class="scrolled ? 'text-gray-600 hover:text-blue-600' : 'text-gray-200 hover:text-white'" class="text-sm font-medium transition" x-text="$t('about.projects')">Projects</a>
+                <a href="#contact" class="btn-primary text-white text-sm font-semibold px-5 py-2.5 rounded-xl" x-text="$t('contact.label')">Contact</a>
+            </div>
+            <button @click="mobileOpen = !mobileOpen" :class="scrolled ? 'text-gray-700' : 'text-white'" class="md:hidden p-2">
+                <svg x-show="!mobileOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <svg x-show="mobileOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:none"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div x-show="mobileOpen" x-cloak class="md:hidden bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0">
+            <div class="py-3">
+                <a href="#about" @click="mobileOpen = false" class="block px-5 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50"><span x-text="$t('nav.about')">About</span></a>
+                <a href="#skills" @click="mobileOpen = false" class="block px-5 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50"><span x-text="$t('nav.skills')">Skills</span></a>
+                <a href="#experience" @click="mobileOpen = false" class="block px-5 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50"><span x-text="$t('nav.exp')">Experience</span></a>
+                <a href="#projects" @click="mobileOpen = false" class="block px-5 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50"><span x-text="$t('nav.proj')">Projects</span></a>
+                <a href="#contact" @click="mobileOpen = false" class="block mx-3 mt-2 px-5 py-3 text-sm font-medium text-white bg-blue-600 rounded-xl text-center"><span x-text="$t('nav.contact')">Contact</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="relative min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden opacity-20">
+            <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-[120px]"></div>
+        </div>
+        <div class="relative max-w-6xl mx-auto px-6 py-32 md:py-40 w-full">
+            <div class="max-w-3xl">
+                <div class="fade-in fade-in-delay-1 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm text-blue-200 border border-white/10 mb-6">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span x-text="$t('hero.available')">Available for opportunities</span>
+                </div>
+                <h1 class="fade-in fade-in-delay-1 text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                    <span x-html="$t('hero.title')">Hi, I'm <span class="gradient-text">Gilang</span></span>
+                </h1>
+                <p class="fade-in fade-in-delay-2 text-xl md:text-2xl text-blue-200 mt-4 font-light">
+                    <span x-html="$t('hero.subtitle')">Software Developer with <span class="text-white font-semibold">5 years</span> of experience</span>
+                </p>
+                <p class="fade-in fade-in-delay-2 text-gray-400 mt-3 max-w-xl">
+                    <span x-text="$t('hero.desc')">Crafting robust backend systems and engaging frontend experiences &mdash; from .NET and Laravel to Angular and Tailwind.</span>
+                </p>
+                <div class="fade-in fade-in-delay-3 flex flex-wrap gap-4 mt-8">
+                    <a href="#projects" class="btn-primary text-white font-semibold px-6 py-3 rounded-xl inline-flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0l-6-6m6 6l-6 6"/></svg>
+                        View My Work
+                    </a>
+                    <a href="#contact" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/20 transition inline-flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 float">
+            <svg class="w-6 h-6 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </div>
+    </section>    <!-- ABOUT -->
+    <section id="about" class="py-20 md:py-28 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-blue-600 font-semibold text-sm tracking-wider uppercase" x-text="$t('about.label')">About Me</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2"><span x-html="$t('about.title')">Passionate <span class="gradient-text">Full Stack</span> Developer</span></h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mt-4 mb-6"></div>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Software Developer with approximately <strong class="text-gray-800">5 years</strong> of experience, specializing in building enterprise-scale applications using microservices architecture. Currently working as
+                        <strong class="text-gray-800">IT Full Stack Engineer at Manulife</strong>. Previously served as
+                        <strong class="text-gray-800">Senior Developer at PT Adicipta Inovasi Teknologi</strong>,
+                        <strong class="text-gray-800">Software Developer at Bank OCBC NISP</strong>,
+                        <strong class="text-gray-800">Web Developer at Morning Glory Enterprise</strong>, and
+                        <strong class="text-gray-800">Junior Backend Developer at PT Drago Kreatifindo</strong>.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        <span x-html="$t('about.p2')">Proficient in backend development with <strong>.NET (C#, VB), Laravel, CodeIgniter</strong>, and modern frontend with <strong>Angular, JavaScript, TypeScript</strong>. Experienced with <strong>Apache Kafka, RabbitMQ</strong> for message brokering and <strong>Camunda</strong> for business process automation. Skilled in <strong>PostgreSQL, SQL Server, MySQL, Oracle</strong> for database management. Comfortable with <strong>microservices architecture</strong> and third-party system integrations in large-scale national projects.</span>
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-blue-50 rounded-xl px-4 py-3 text-center min-w-[100px]">
+                            <div class="text-2xl font-bold text-blue-600">5</div>
+                            <div class="text-xs text-gray-500" x-text="$t('about.years')">Years Exp</div>
+                        </div>
+                        <div class="bg-purple-50 rounded-xl px-4 py-3 text-center min-w-[100px]">
+                            <div class="text-2xl font-bold text-purple-600">5</div>
+                            <div class="text-xs text-gray-500" x-text="$t('about.companies')">Companies</div>
+                        </div>
+                        <div class="bg-orange-50 rounded-xl px-4 py-3 text-center min-w-[100px]">
+                            <div class="text-2xl font-bold text-orange-600">15+</div>
+                            <div class="text-xs text-gray-500">Projects</div>
+                        </div>
+                        <div class="bg-cyan-50 rounded-xl px-4 py-3 text-center min-w-[100px]">
+                            <div class="text-2xl font-bold text-cyan-600">10+</div>
+                            <div class="text-xs text-gray-500">Projects</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-blue-400 to-purple-500 rounded-3xl rotate-6 absolute inset-0 opacity-20 blur-sm"></div>
+                        <div class="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-blue-50 to-gray-100 rounded-3xl flex items-center justify-center border-2 border-gray-200 relative">
+                            <span class="text-7xl">&#x1F468;&#x200D;&#x1F4BB;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-20 md:py-28 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-blue-600 font-semibold text-sm tracking-wider uppercase">Skills</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2" x-text="$t('skills.title')">Tech Stack</h2>
+                <p class="text-gray-500 mt-3"><span x-text="$t('skills.desc')">Technologies I work with on a daily basis</span></p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition skill-card">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center skill-icon">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg" x-text="$t('skills.backend')">Backend</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-50 text-blue-700 text-sm font-medium px-3 py-1.5 rounded-lg">.NET</span>
+                        <span class="bg-indigo-50 text-indigo-700 text-sm font-medium px-3 py-1.5 rounded-lg">VB</span>
+                        <span class="bg-red-50 text-red-700 text-sm font-medium px-3 py-1.5 rounded-lg">Laravel</span>
+                        <span class="bg-orange-50 text-orange-700 text-sm font-medium px-3 py-1.5 rounded-lg">CodeIgniter</span>
+                        <span class="bg-green-50 text-green-700 text-sm font-medium px-3 py-1.5 rounded-lg">REST API</span>
+                        <span class="bg-cyan-50 text-cyan-700 text-sm font-medium px-3 py-1.5 rounded-lg">Microservices</span>
+                        <span class="bg-purple-50 text-purple-700 text-sm font-medium px-3 py-1.5 rounded-lg">PostgreSQL</span>
+                        <span class="bg-yellow-50 text-yellow-700 text-sm font-medium px-3 py-1.5 rounded-lg">MySQL</span>
+                        <span class="bg-teal-50 text-teal-700 text-sm font-medium px-3 py-1.5 rounded-lg">SQL Server</span>
+                        <span class="bg-red-100 text-red-700 text-sm font-medium px-3 py-1.5 rounded-lg">Oracle</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition skill-card">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center skill-icon">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg" x-text="$t('skills.frontend')">Frontend</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-red-50 text-red-700 text-sm font-medium px-3 py-1.5 rounded-lg">Angular</span>
+                        <span class="bg-blue-50 text-blue-700 text-sm font-medium px-3 py-1.5 rounded-lg">TypeScript</span>
+                        <span class="bg-yellow-50 text-yellow-700 text-sm font-medium px-3 py-1.5 rounded-lg">JavaScript</span>
+                        <span class="bg-blue-50 text-blue-700 text-sm font-medium px-3 py-1.5 rounded-lg">Tailwind CSS</span>
+                        <span class="bg-purple-50 text-purple-700 text-sm font-medium px-3 py-1.5 rounded-lg">Bootstrap</span>
+                        <span class="bg-cyan-50 text-cyan-700 text-sm font-medium px-3 py-1.5 rounded-lg">Alpine.js</span>
+                        <span class="bg-orange-50 text-orange-700 text-sm font-medium px-3 py-1.5 rounded-lg">jQuery</span>
+                        <span class="bg-green-50 text-green-700 text-sm font-medium px-3 py-1.5 rounded-lg">Blade</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition skill-card">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center skill-icon">
+                            <svg class="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg" x-text="$t('skills.tools')">Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-3 py-1.5 rounded-lg">Docker</span>
+                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-3 py-1.5 rounded-lg">Git</span>
+                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-3 py-1.5 rounded-lg">Linux</span>
+                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-3 py-1.5 rounded-lg">PgAdmin</span>
+                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-3 py-1.5 rounded-lg">Cloudflare</span>
+                        <span class="bg-orange-100 text-orange-700 text-sm font-medium px-3 py-1.5 rounded-lg">Kafka</span>
+                        <span class="bg-amber-100 text-amber-700 text-sm font-medium px-3 py-1.5 rounded-lg">RabbitMQ</span>
+                        <span class="bg-rose-100 text-rose-700 text-sm font-medium px-3 py-1.5 rounded-lg">Camunda</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- EXPERIENCE -->
+    <section id="experience" class="py-20 md:py-28 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-blue-600 font-semibold text-sm tracking-wider uppercase">Experience</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2" x-text="$t('exp.title')">Work History</h2>
+                <p class="text-gray-500 mt-3"><span x-text="$t('exp.desc')">My professional journey</span></p>
+            </div>
+            <div class="max-w-3xl mx-auto space-y-8">
+                <div class="relative pl-8 border-l-2 border-blue-200">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-blue-600 rounded-full timeline-dot"></div>
+                    <div class="bg-gray-50 rounded-xl p-6 hover:shadow-sm transition">
+                        <div class="flex items-start justify-between flex-wrap gap-2">
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-lg" x-text="$t('exp.manulife.title')">IT Full Stack Engineer</h3>
+                                <p class="text-blue-600 font-medium" x-text="$t('exp.manulife.company')">Manulife</p>
+                            </div>
+                            <span class="text-sm text-gray-400 bg-white px-3 py-1 rounded-full border" x-text="$t('exp.manulife.date')">Jul 2025 — Present</span>
+                        </div>
+                        <ul class="text-gray-500 text-sm mt-3 space-y-1.5 list-disc list-inside">
+                            <li><span x-html="$t('exp.manulife.d1')">Developed <strong>PDLINK Web Agent</strong> for Manulife's partner banks: <strong>DBS</strong> and <strong>Danamon</strong>.</span></li>
+                            <li><span x-html="$t('exp.manulife.d2')">Built using <strong>.NET (VB)</strong> for backend, <strong>Angular</strong> for frontend, and <strong>Oracle</strong> for database.</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative pl-8 border-l-2 border-indigo-200">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-indigo-600 rounded-full timeline-dot"></div>
+                    <div class="bg-gray-50 rounded-xl p-6 hover:shadow-sm transition">
+                        <div class="flex items-start justify-between flex-wrap gap-2">
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-lg" x-text="$t('exp.adins.title')">Senior Software Developer</h3>
+                                <p class="text-indigo-600 font-medium" x-text="$t('exp.adins.company')">PT Adicipta Inovasi Teknologi (PT ADINS)</p>
+                            </div>
+                            <span class="text-sm text-gray-400 bg-white px-3 py-1 rounded-full border" x-text="$t('exp.adins.date')">Jun 2024 — Present</span>
+                        </div>
+                        <ul class="text-gray-500 text-sm mt-3 space-y-1.5 list-disc list-inside">
+                            <li><span x-html="$t('exp.adins.d1')">Contributed to the <strong>Hyundai Capital</strong> project — delivered key modules: AMS (Asset Management System) & CMS (Collection Management System).</span></li>
+                            <li><span x-html="$t('exp.adins.d2')">Supervised development processes, ensured milestones met on time with high-quality standards.</span></li>
+                            <li><span x-html="$t('exp.adins.d3')">Utilized <strong>.NET</strong> for backend, <strong>Angular</strong> for frontend, and <strong>PostgreSQL</strong> for database management.</span></li>
+                            <li><span x-html="$t('exp.adins.d4')">Implemented <strong>RabbitMQ</strong> for message queueing and <strong>Camunda</strong> for business process automation.</span></li>
+                            <li><span x-html="$t('exp.adins.d5')">Integrated multiple third-party systems: Asuransi Sinarmas, KBRU (regional bank), PT Delima (fiduciary), and Softphone system.</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative pl-8 border-l-2 border-purple-200">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-purple-600 rounded-full timeline-dot"></div>
+                    <div class="bg-gray-50 rounded-xl p-6 hover:shadow-sm transition">
+                        <div class="flex items-start justify-between flex-wrap gap-2">
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-lg" x-text="$t('exp.ocbc.title')">Software Developer</h3>
+                                <p class="text-purple-600 font-medium" x-text="$t('exp.ocbc.company')">Bank OCBC NISP</p>
+                            </div>
+                            <span class="text-sm text-gray-400 bg-white px-3 py-1 rounded-full border" x-text="$t('exp.ocbc.date')">May 2022 — May 2024</span>
+                        </div>
+                        <ul class="text-gray-500 text-sm mt-3 space-y-1.5 list-disc list-inside">
+                            <li><span x-html="$t('exp.ocbc.d1')">Developed and enhanced <strong>6+ internal projects</strong> using <strong>microservices architecture</strong>.</span></li>
+                            <li><span x-html="$t('exp.ocbc.d2')">Created test scenarios, conducted SIT, and led UAT to ensure features met business requirements.</span></li>
+                            <li><span x-html="$t('exp.ocbc.d3')">Optimized SQL queries, debugged issues across dev and production, handled system integration between legacy and modern platforms.</span></li>
+                            <li><span x-html="$t('exp.ocbc.d4')">Used <strong>.NET (C#, ASP.NET Core, Web API)</strong> for backend, <strong>Angular</strong> for frontend, <strong>SQL Server</strong> for database.</span></li>
+                            <li><span x-html="$t('exp.ocbc.d5')">Worked with <strong>Apache Kafka</strong> as message broker for distributed systems & asynchronous communication.</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative pl-8 border-l-2 border-amber-200">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-amber-600 rounded-full timeline-dot"></div>
+                    <div class="bg-gray-50 rounded-xl p-6 hover:shadow-sm transition">
+                        <div class="flex items-start justify-between flex-wrap gap-2">
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-lg" x-text="$t('exp.mge.title')">Web Programmer</h3>
+                                <p class="text-amber-600 font-medium" x-text="$t('exp.mge.company')">Morning Glory Enterprise</p>
+                            </div>
+                            <span class="text-sm text-gray-400 bg-white px-3 py-1 rounded-full border" x-text="$t('exp.mge.date')">Nov 2020 — Feb 2021</span>
+                        </div>
+                        <ul class="text-gray-500 text-sm mt-3 space-y-1.5 list-disc list-inside">
+                            <li><span x-html="$t('exp.mge.d1')">Collaborated with team to test applications and refine functionality based on feedback.</span></li>
+                            <li><span x-html="$t('exp.mge.d2')">Developed responsive front-end interfaces based on UI/UX designs.</span></li>
+                            <li><span x-html="$t('exp.mge.d3')">Designed and structured database schemas to meet system requirements.</span></li>
+                            <li><span x-html="$t('exp.mge.d4')">Identified and resolved bugs during development, ensuring stability and performance.</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="relative pl-8 border-l-2 border-rose-200">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-rose-600 rounded-full timeline-dot"></div>
+                    <div class="bg-gray-50 rounded-xl p-6 hover:shadow-sm transition">
+                        <div class="flex items-start justify-between flex-wrap gap-2">
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-lg" x-text="$t('exp.drago.title')">Junior Backend Developer</h3>
+                                <p class="text-rose-600 font-medium" x-text="$t('exp.drago.company')">PT Drago Kreatifindo</p>
+                            </div>
+                            <span class="text-sm text-gray-400 bg-white px-3 py-1 rounded-full border" x-text="$t('exp.drago.date')">Aug 2019 — Aug 2020</span>
+                        </div>
+                        <ul class="text-gray-500 text-sm mt-3 space-y-1.5 list-disc list-inside">
+                            <li><span x-html="$t('exp.drago.d1')">Assisted senior back-end developers in building and maintaining web applications.</span></li>
+                            <li><span x-html="$t('exp.drago.d2')">Monitored application performance and resolved bugs and system errors.</span></li>
+                            <li><span x-html="$t('exp.drago.d3')">Developed RESTful APIs to support mobile and web applications.</span></li>
+                            <li><span x-html="$t('exp.drago.d4')">Built systems using <strong>PHP Laravel</strong> as main framework and <strong>MySQL</strong> for database.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-10">
+                <a href="#" class="inline-flex items-center gap-2 text-blue-600 font-medium hover:text-blue-800 transition">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    Download CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="py-20 md:py-28 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-blue-600 font-semibold text-sm tracking-wider uppercase">Projects</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Featured Work</h2>
+                <p class="text-gray-500 mt-3">Projects I've built and contributed to</p>
+            </div>
+            <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center p-8">
+                        <div class="text-center text-white">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                            <div class="text-xl font-bold">Lab Equipment</div>
+                            <div class="text-xs text-blue-200" x-text="$t('proj.lab.badge')">Borrowing System</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-1.5 mb-3">
+                            <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded">Laravel 13</span>
+                            <span class="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded">Tailwind CSS</span>
+                            <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded">PostgreSQL</span>
+                            <span class="text-xs bg-cyan-50 text-cyan-700 px-2 py-0.5 rounded">Docker</span>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-2" x-text="$t('proj.lab.title')">Lab Equipment Borrowing System</h3>
+                        <p class="text-sm text-gray-500 mb-4"><span x-text="$t('proj.lab.desc')">Sistem peminjaman alat laboratorium berbasis web dengan fitur CRUD alat, peminjaman multi-item, approval flow, dan dashboard admin.</span></p>
+                        <a href="https://lab.novasistem.cloud" target="_blank" class="text-blue-600 font-medium hover:text-blue-800 transition inline-flex items-center gap-1 text-sm">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-emerald-600 to-teal-600 flex items-center justify-center p-8">
+                        <div class="text-center text-white">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                            <div class="text-xl font-bold">Desa Digital</div>
+                            <div class="text-xs text-emerald-200" x-text="$t('proj.desadigital.badge')">Village Information System</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-1.5 mb-3">
+                            <span class="text-xs bg-red-50 text-red-700 px-2 py-0.5 rounded">Laravel</span>
+                            <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded">Tailwind CSS</span>
+                            <span class="text-xs bg-yellow-50 text-yellow-700 px-2 py-0.5 rounded">MySQL</span>
+                            <span class="text-xs bg-cyan-50 text-cyan-700 px-2 py-0.5 rounded">Docker</span>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-2">Desa Digital v2</h3>
+                        <p class="text-sm text-gray-500 mb-4"><span x-text="$t('proj.desadigital.desc')">Portal desa terintegrasi dengan fitur profil desa, demografi, berita, pelayanan administrasi, peta interaktif, pasar desa/UMKM, dan manajemen pengguna.</span></p>
+                        <a href="https://desadigital.novasistem.cloud" target="_blank" class="text-blue-600 font-medium hover:text-blue-800 transition inline-flex items-center gap-1 text-sm">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center p-8">
+                        <div class="text-center text-white">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            <div class="text-xl font-bold">Landing Page</div>
+                            <div class="text-xs text-amber-200" x-text="$t('proj.landing.badge')">Web Services</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-1.5 mb-3">
+                            <span class="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded">Tailwind CSS</span>
+                            <span class="text-xs bg-red-50 text-red-700 px-2 py-0.5 rounded">Alpine.js</span>
+                            <span class="text-xs bg-cyan-50 text-cyan-700 px-2 py-0.5 rounded">Docker</span>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-2" x-text="$t('proj.landing.title')">NovaTech Landing Page</h3>
+                        <p class="text-sm text-gray-500 mb-4"><span x-text="$t('proj.landing.desc')">Landing page jasa pembuatan website profesional. Responsif, mobile-friendly, dengan navigasi smooth, pricing section, dan WhatsApp integration.</span></p>
+                        <a href="https://landing.novasistem.cloud" target="_blank" class="text-blue-600 font-medium hover:text-blue-800 transition inline-flex items-center gap-1 text-sm">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-violet-600 to-fuchsia-600 flex items-center justify-center p-8">
+                        <div class="text-center text-white">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                            <div class="text-xl font-bold">Company Profile</div>
+                            <div class="text-xs text-fuchsia-200" x-text="$t('proj.company.badge')">Business Template</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-1.5 mb-3">
+                            <span class="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded">Tailwind CSS</span>
+                            <span class="text-xs bg-red-50 text-red-700 px-2 py-0.5 rounded">Alpine.js</span>
+                            <span class="text-xs bg-cyan-50 text-cyan-700 px-2 py-0.5 rounded">Docker</span>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-2" x-text="$t('proj.company.title')">Company Profile Template</h3>
+                        <p class="text-sm text-gray-500 mb-4"><span x-text="$t('proj.company.desc')">Template company profile profesional multi-halaman dengan hero section, tentang kami, layanan, galeri, kontak form, dan footer.</span></p>
+                        <a href="https://company.novasistem.cloud" target="_blank" class="text-blue-600 font-medium hover:text-blue-800 transition inline-flex items-center gap-1 text-sm">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            Live Demo
+                        </a>
+                    </div>
+                <div class="project-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 group project-card">
+                    <div class="h-44 bg-gradient-to-br from-amber-300 via-yellow-200 to-orange-300 flex items-center justify-center relative overflow-hidden">
+                        <div class="text-center text-white">
+                            <span class="text-6xl block mb-1 group-hover:scale-110 transition-transform duration-500">🧁</span>
+                            <div class="text-xl font-bold text-amber-900">SweetBake</div>
+                            <div class="text-xs text-amber-700" x-text="$t('proj.sweetbake.badge')">Toko Kue Online</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-1.5 mb-3">
+                            <span class="text-xs bg-amber-50 text-amber-700 px-2 py-0.5 rounded">HTML</span>
+                            <span class="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded">Tailwind CSS</span>
+                            <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded">Alpine.js</span>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-2" x-text="$t('proj.sweetbake.title')">SweetBake</h3>
+                        <p class="text-sm text-gray-500 mb-4"><span x-text="$t('proj.sweetbake.desc')">Toko kue online dengan katalog produk, integrasi WhatsApp untuk pemesanan, dan desain responsif mobile-friendly.</span></p>
+                        <a href="https://tokokue.novasistem.cloud" target="_blank" class="text-blue-600 font-medium hover:text-blue-800 transition inline-flex items-center gap-1 text-sm">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SWEETBAKE CARD -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-green-600 to-lime-600 flex items-center justify-center p-8">
+                        <div class="text-center text-white">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                            <div class="text-xl font-bold">POS System</div>
+                            <div class="text-xs text-lime-200" x-text="$t('proj.pos.badge')">Point of Sale</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-1.5 mb-3">
+                            <span class="text-xs bg-red-50 text-red-700 px-2 py-0.5 rounded">Laravel 13</span>
+                            <span class="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded">Tailwind CSS</span>
+                            <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded">Alpine.js</span>
+                            <span class="text-xs bg-yellow-50 text-yellow-700 px-2 py-0.5 rounded">MySQL</span>
+                            <span class="text-xs bg-cyan-50 text-cyan-700 px-2 py-0.5 rounded">Docker</span>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-2" x-text="$t('proj.pos.title')">Sistem POS Warung</h3>
+                        <p class="text-sm text-gray-500 mb-4"><span x-text="$t('proj.pos.desc')">Sistem Point of Sale untuk warung kelontong dengan fitur POS kasir interaktif, manajemen stok produk (50+ produk real), CRUD kategori & produk, laporan revenue, cetak struk, dan data dummy barang warung lengkap.</span></p>
+                        <a href="https://pos.novasistem.cloud" target="_blank" class="text-blue-600 font-medium hover:text-blue-800 transition inline-flex items-center gap-1 text-sm">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-20 md:py-28 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <span class="text-blue-300 font-semibold text-sm tracking-wider uppercase">Contact</span>
+            <h2 class="text-3xl md:text-4xl font-bold mt-2" x-text="$t('contact.title')">Let's Work Together</h2>
+            <p class="text-gray-400 mt-3 max-w-lg mx-auto"><span x-text="$t('contact.desc')">Have a project in mind or just want to chat? Feel free to reach out!</span></p>
+            <div class="grid md:grid-cols-3 gap-6 mt-12">
+                <a href="mailto:mgfa9802@gmail.com" class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition group">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <p class="font-semibold" x-text="$t('contact.email')">Email</p>
+                    <p class="text-sm text-gray-400 mt-1">mgfa9802@gmail.com</p>
+                </a>
+                <a href="https://linkedin.com/in/muhamad-gilang-fikri-azi-4ba885137" target="_blank" class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition group">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+                        <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </div>
+                    <p class="font-semibold" x-text="$t('contact.linkedin')">LinkedIn</p>
+                    <p class="text-sm text-gray-400 mt-1"><span x-text="$t('contact.conn')">Connect with me</span></p>
+                </a>
+                <a href="#" class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition group">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <p class="font-semibold" x-text="$t('contact.location')">Location</p>
+                    <p class="text-sm text-gray-400 mt-1"><span x-text="$t('contact.locdetail')">Indonesia</span></p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+<script id="trans-dict" type="application/json">{"hero.available":{"id":"Tersedia untuk peluang","en":"Available for opportunities"},"hero.title":{"id":"Halo, Saya \u003cspan class=\"gradient-text\"\u003eGilang\u003c/span\u003e","en":"Hi, I\u0027m \u003cspan class=\"gradient-text\"\u003eGilang\u003c/span\u003e"},"hero.subtitle":{"id":"Software Developer dengan pengalaman \u003cstrong class=\"text-white font-semibold\"\u003e5 tahun\u003c/strong\u003e","en":"Software Developer with \u003cstrong class=\"text-white font-semibold\"\u003e5 years\u003c/strong\u003e of experience"},"hero.desc":{"id":"Membangun sistem backend yang kokoh dan pengalaman frontend yang menarik — dari .NET dan Laravel hingga Angular dan Tailwind.","en":"Crafting robust backend systems and engaging frontend experiences — from .NET and Laravel to Angular and Tailwind."},"hero.view":{"id":"Lihat Karya Saya","en":"View My Work"},"hero.contact":{"id":"Hubungi Saya","en":"Contact Me"},"nav.about":{"id":"Tentang","en":"About"},"nav.skills":{"id":"Keahlian","en":"Skills"},"nav.exp":{"id":"Pengalaman","en":"Experience"},"nav.proj":{"id":"Proyek","en":"Projects"},"nav.contact":{"id":"Kontak","en":"Contact"},"about.label":{"id":"Tentang Saya","en":"About Me"},"about.title":{"id":"Pengembang \u003cspan class=\"gradient-text\"\u003eFull Stack\u003c/span\u003e yang Bersemangat","en":"Passionate \u003cspan class=\"gradient-text\"\u003eFull Stack\u003c/span\u003e Developer"},"about.p1":{"id":"Pengembang perangkat lunak dengan pengalaman sekitar \u003cstrong class=\"text-gray-800\"\u003e5 tahun\u003c/strong\u003e, spesialis membangun aplikasi skala enterprise menggunakan arsitektur microservices. Saat ini bekerja sebagai \u003cstrong class=\"text-gray-800\"\u003eIT Full Stack Engineer di Manulife\u003c/strong\u003e. Sebelumnya menjabat sebagai \u003cstrong class=\"text-gray-800\"\u003eSenior Developer di PT Adicipta Inovasi Teknologi\u003c/strong\u003e, \u003cstrong class=\"text-gray-800\"\u003eSoftware Developer di Bank OCBC NISP\u003c/strong\u003e, \u003cstrong class=\"text-gray-800\"\u003eWeb Developer di Morning Glory Enterprise\u003c/strong\u003e, dan \u003cstrong class=\"text-gray-800\"\u003eJunior Backend Developer di PT Drago Kreatifindo\u003c/strong\u003e.","en":"Software Developer with approximately \u003cstrong class=\"text-gray-800\"\u003e5 years\u003c/strong\u003e of experience, specializing in building enterprise-scale applications using microservices architecture. Currently working as \u003cstrong class=\"text-gray-800\"\u003eIT Full Stack Engineer at Manulife\u003c/strong\u003e. Previously served as \u003cstrong class=\"text-gray-800\"\u003eSenior Developer at PT Adicipta Inovasi Teknologi\u003c/strong\u003e, \u003cstrong class=\"text-gray-800\"\u003eSoftware Developer at Bank OCBC NISP\u003c/strong\u003e, \u003cstrong class=\"text-gray-800\"\u003eWeb Developer at Morning Glory Enterprise\u003c/strong\u003e, and \u003cstrong class=\"text-gray-800\"\u003eJunior Backend Developer at PT Drago Kreatifindo\u003c/strong\u003e."},"about.p2":{"id":"Mahir dalam pengembangan backend dengan \u003cstrong\u003e.NET (C#, VB), Laravel, CodeIgniter\u003c/strong\u003e, dan frontend modern dengan \u003cstrong\u003eAngular, JavaScript, TypeScript\u003c/strong\u003e. Berpengalaman dengan \u003cstrong\u003eApache Kafka, RabbitMQ\u003c/strong\u003e untuk message brokering dan \u003cstrong\u003eCamunda\u003c/strong\u003e untuk otomatisasi proses bisnis. Terampil dalam \u003cstrong\u003ePostgreSQL, SQL Server, MySQL, Oracle\u003c/strong\u003e untuk manajemen database. Nyaman dengan \u003cstrong\u003earsitektur microservices\u003c/strong\u003e dan integrasi sistem pihak ketiga dalam proyek nasional skala besar.","en":"Proficient in backend development with \u003cstrong\u003e.NET (C#, VB), Laravel, CodeIgniter\u003c/strong\u003e, and modern frontend with \u003cstrong\u003eAngular, JavaScript, TypeScript\u003c/strong\u003e. Experienced with \u003cstrong\u003eApache Kafka, RabbitMQ\u003c/strong\u003e for message brokering and \u003cstrong\u003eCamunda\u003c/strong\u003e for business process automation. Skilled in \u003cstrong\u003ePostgreSQL, SQL Server, MySQL, Oracle\u003c/strong\u003e for database management. Comfortable with \u003cstrong\u003emicroservices architecture\u003c/strong\u003e and third-party system integrations in large-scale national projects."},"about.years":{"id":"Thn Pengalaman","en":"Years Exp"},"about.companies":{"id":"Perusahaan","en":"Companies"},"about.projects":{"id":"Proyek","en":"Projects"},"about.tech":{"id":"Teknologi","en":"Technologies"},"skills.label":{"id":"Keahlian","en":"Skills"},"skills.title":{"id":"Tech Stack","en":"Tech Stack"},"skills.desc":{"id":"Teknologi yang saya gunakan sehari-hari","en":"Technologies I work with on a daily basis"},"skills.backend":{"id":"Backend","en":"Backend"},"skills.frontend":{"id":"Frontend","en":"Frontend"},"skills.tools":{"id":"Tools","en":"Tools"},"exp.label":{"id":"Pengalaman","en":"Experience"},"exp.title":{"id":"Riwayat Pekerjaan","en":"Work History"},"exp.desc":{"id":"Perjalanan profesional saya","en":"My professional journey"},"exp.dl":{"id":"Unduh CV","en":"Download CV"},"proj.label":{"id":"Proyek","en":"Projects"},"proj.title":{"id":"Karya Unggulan","en":"Featured Work"},"proj.desc":{"id":"Proyek yang telah saya bangun","en":"Projects I\u0027ve built and contributed to"},"proj.live":{"id":"Demo Langsung","en":"Live Demo"},"contact.label":{"id":"Kontak","en":"Contact"},"contact.title":{"id":"Mari Bekerja Sama","en":"Let\u0027s Work Together"},"contact.desc":{"id":"Punya proyek atau hanya ingin ngobrol? Jangan ragu untuk menghubungi!","en":"Have a project in mind or just want to chat? Feel free to reach out!"},"proj.sweetbake.title":{"id":"SweetBake","en":"SweetBake"},"proj.sweetbake.badge":{"id":"Toko Kue Online","en":"Cake Store"},"proj.sweetbake.desc":{"id":"Toko kue online dengan katalog produk, integrasi WhatsApp untuk pemesanan, dan desain responsif mobile-friendly.","en":"Online cake store with product catalog, WhatsApp ordering integration, and responsive mobile-friendly design."},"exp.adins.company":{"id":"PT ADINS","en":"PT ADINS"},"exp.ocbc.d5":{"id":"Bekerja dengan Apache Kafka sebagai message broker","en":"Worked with Apache Kafka as message broker"},"exp.manulife.date":{"id":"Jun 2025 - Sekarang","en":"Jun 2025 - Present"},"exp.drago.title":{"id":"Junior Backend Developer","en":"Junior Backend Developer"},"exp.manulife.company":{"id":"Manulife Indonesia","en":"Manulife Indonesia"},"exp.ocbc.d4":{"id":"Menggunakan .NET (C#, ASP.NET Core, Web API), Angular, SQL Server","en":"Used .NET (C#, ASP.NET Core, Web API), Angular, SQL Server"},"exp.drago.company":{"id":"PT Drago Kreatifindo","en":"PT Drago Kreatifindo"},"exp.mge.d1":{"id":"Berkolaborasi dengan tim untuk testing dan refinement aplikasi","en":"Collaborated with team on testing and application refinement"},"exp.ocbc.d3":{"id":"Optimasi SQL query, debugging environment development \u0026 production","en":"Optimized SQL queries, debugged dev \u0026 production environments"},"exp.adins.d5":{"id":"Integrasi sistem pihak ketiga: Asuransi Sinarmas, KBRU, PT Delima, Softphone","en":"Third-party integration: Asuransi Sinarmas, KBRU, PT Delima, Softphone"},"exp.mge.company":{"id":"Morning Glory Enterprise","en":"Morning Glory Enterprise"},"exp.adins.title":{"id":"Senior Software Developer","en":"Senior Software Developer"},"exp.ocbc.company":{"id":"Bank OCBC NISP","en":"Bank OCBC NISP"},"exp.ocbc.title":{"id":"Software Developer","en":"Software Developer"},"exp.mge.date":{"id":"Nov 2020 - Feb 2021","en":"Nov 2020 - Feb 2021"},"exp.adins.d2":{"id":"Mengawasi proses development dan memastikan milestone tercapai tepat waktu","en":"Supervised development processes, ensured milestones met on time"},"exp.ocbc.d1":{"id":"Mengembangkan 6+ proyek internal dengan arsitektur microservices","en":"Developed 6+ internal projects using microservices architecture"},"exp.mge.d4":{"id":"Mengidentifikasi dan memperbaiki bug selama development","en":"Identified and resolved bugs during development"},"exp.adins.date":{"id":"Jun 2024 - Jun 2025","en":"Jun 2024 - Jun 2025"},"exp.adins.d1":{"id":"Berkontribusi pada proyek Hyundai Capital: AMS \u0026 CMS","en":"Contributed to Hyundai Capital project: AMS \u0026 CMS"},"exp.drago.d3":{"id":"Mengembangkan REST API untuk aplikasi mobile dan web","en":"Developed REST APIs for mobile and web apps"},"exp.ocbc.date":{"id":"Mei 2022 - Mei 2024","en":"May 2022 - May 2024"},"exp.manulife.title":{"id":"IT Full Stack Engineer","en":"IT Full Stack Engineer"},"exp.manulife.d1":{"id":"Mengembangkan dan memelihara aplikasi internal perusahaan","en":"Develop and maintain internal company applications"},"exp.mge.title":{"id":"Web Programmer","en":"Web Programmer"},"exp.manulife.d2":{"id":"Berkolaborasi dengan tim lintas fungsi untuk pengembangan fitur baru","en":"Collaborate with cross-functional teams on new feature development"},"exp.mge.d2":{"id":"Mengembangkan frontend responsif berdasarkan UI/UX design","en":"Developed responsive frontend based on UI/UX designs"},"exp.drago.d2":{"id":"Memantau performa aplikasi dan memperbaiki bug","en":"Monitored app performance and fixed bugs"},"exp.adins.d3":{"id":"Menggunakan .NET untuk backend, Angular untuk frontend, PostgreSQL untuk database","en":"Used .NET for backend, Angular for frontend, PostgreSQL for database"},"exp.mge.d3":{"id":"Mendesain dan menstruktur skema database","en":"Designed and structured database schemas"},"exp.adins.d4":{"id":"Mengimplementasikan RabbitMQ untuk message queueing dan Camunda untuk otomatisasi proses","en":"Implemented RabbitMQ for message queueing and Camunda for process automation"},"exp.drago.d1":{"id":"Membantu senior backend developer membangun dan memelihara aplikasi web","en":"Assisted senior backend developers in building web applications"},"exp.drago.d4":{"id":"Membangun sistem menggunakan PHP Laravel dan MySQL","en":"Built systems using PHP Laravel and MySQL"},"exp.drago.date":{"id":"Agu 2019 - Agu 2020","en":"Aug 2019 - Aug 2020"},"exp.ocbc.d2":{"id":"Membuat test scenario, SIT, dan memimpin UAT","en":"Created test scenarios, SIT, and led UAT"},"proj.lab.title":{"id":"Lab Equipment Borrowing","en":"Lab Equipment Borrowing"},"proj.lab.desc":{"id":"Sistem peminjaman alat laboratorium berbasis web dengan manajemen pengguna, role-based access, dan tracking peminjaman real-time menggunakan Laravel + PostgreSQL.","en":"Web-based lab equipment borrowing system with user management, role-based access, and real-time borrowing tracking using Laravel + PostgreSQL."},"proj.lab.badge":{"id":"In Progress","en":"In Progress"},"proj.company.title":{"id":"Company Profile","en":"Company Profile"},"proj.company.desc":{"id":"Company profile website responsif dengan desain modern, menampilkan layanan, portofolio, dan informasi kontak. Dibangun dengan HTML, Tailwind CSS, dan Alpine.js.","en":"Responsive company profile website with modern design, showcasing services, portfolio, and contact info. Built with HTML, Tailwind CSS, and Alpine.js."},"proj.company.badge":{"id":"Selesai","en":"Done"},"proj.desadigital.title":{"id":"DesaDigital v2","en":"DesaDigital v2"},"proj.desadigital.desc":{"id":"Platform digital desa dengan fitur berita, pengaduan, manajemen surat, dan peta desa. Sistem berbasis Laravel + MySQL dengan middleware admin dan autentikasi multi-level.","en":"Village digital platform with news, complaints, letter management, and village map. Laravel + MySQL based system with admin middleware and multi-level authentication."},"proj.desadigital.badge":{"id":"Selesai","en":"Done"},"proj.pos.title":{"id":"POS System","en":"POS System"},"proj.pos.desc":{"id":"Sistem Point of Sales untuk kasir dengan manajemen produk, transaksi, dan laporan keuangan. Dibangun dengan Laravel + MySQL, dilengkapi fitur cetak struk dan dashboard analitik.","en":"Point of Sales system for cashier with product management, transactions, and financial reporting. Built with Laravel + MySQL, includes receipt printing and analytics dashboard."},"proj.pos.badge":{"id":"Selesai","en":"Done"},"proj.landing.title":{"id":"Landing Page","en":"Landing Page"},"proj.landing.desc":{"id":"Landing page modern dan responsif untuk personal branding dengan desain clean, animasi halus, dan optimalisasi performa. Dibangun dengan HTML, Tailwind CSS, dan Alpine.js.","en":"Modern responsive landing page for personal branding with clean design, smooth animations, and performance optimization. Built with HTML, Tailwind CSS, and Alpine.js."},"proj.landing.badge":{"id":"Selesai","en":"Done"}}</script>
+<script>
+document.addEventListener('alpine:init', () => {
+    const dict = JSON.parse(document.getElementById('trans-dict').textContent);
+    Alpine.store('i18n', { lang: 'id' });
+    Alpine.magic('t', () => key => {
+        try {
+            const l = Alpine.store('i18n').lang;
+            return dict[key] ? dict[key][l] : key;
+        } catch(e) {
+            return dict[key] ? dict[key]['id'] : key;
+        }
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+{
+  "hero.available": {
+    "id": "Tersedia untuk peluang",
+    "en": "Available for opportunities"
+  },
+  "hero.title": {
+    "id": "Halo, Saya <span class=\"gradient-text\">Gilang</span>",
+    "en": "Hi, I'm <span class=\"gradient-text\">Gilang</span>"
+  },
+  "hero.subtitle": {
+    "id": "Software Developer dengan pengalaman <strong class=\"text-white font-semibold\">5 tahun</strong>",
+    "en": "Software Developer with <strong class=\"text-white font-semibold\">5 years</strong> of experience"
+  },
+  "hero.desc": {
+    "id": "Membangun sistem backend yang kokoh dan pengalaman frontend yang menarik — dari .NET dan Laravel hingga Angular dan Tailwind.",
+    "en": "Crafting robust backend systems and engaging frontend experiences — from .NET and Laravel to Angular and Tailwind."
+  },
+  "hero.view": {
+    "id": "Lihat Karya Saya",
+    "en": "View My Work"
+  },
+  "hero.contact": {
+    "id": "Hubungi Saya",
+    "en": "Contact Me"
+  },
+  "nav.about": {
+    "id": "Tentang",
+    "en": "About"
+  },
+  "nav.skills": {
+    "id": "Keahlian",
+    "en": "Skills"
+  },
+  "nav.exp": {
+    "id": "Pengalaman",
+    "en": "Experience"
+  },
+  "nav.proj": {
+    "id": "Proyek",
+    "en": "Projects"
+  },
+  "nav.contact": {
+    "id": "Kontak",
+    "en": "Contact"
+  },
+  "about.label": {
+    "id": "Tentang Saya",
+    "en": "About Me"
+  },
+  "about.title": {
+    "id": "Pengembang <span class=\"gradient-text\">Full Stack</span> yang Bersemangat",
+    "en": "Passionate <span class=\"gradient-text\">Full Stack</span> Developer"
+  },
+  "about.p1": {
+    "id": "Pengembang perangkat lunak dengan pengalaman sekitar <strong class=\"text-gray-800\">5 tahun</strong>, spesialis membangun aplikasi skala enterprise menggunakan arsitektur microservices. Saat ini bekerja sebagai <strong class=\"text-gray-800\">IT Full Stack Engineer di Manulife</strong>. Sebelumnya menjabat sebagai <strong class=\"text-gray-800\">Senior Developer di PT Adicipta Inovasi Teknologi</strong>, <strong class=\"text-gray-800\">Software Developer di Bank OCBC NISP</strong>, <strong class=\"text-gray-800\">Web Developer di Morning Glory Enterprise</strong>, dan <strong class=\"text-gray-800\">Junior Backend Developer di PT Drago Kreatifindo</strong>.",
+    "en": "Software Developer with approximately <strong class=\"text-gray-800\">5 years</strong> of experience, specializing in building enterprise-scale applications using microservices architecture. Currently working as <strong class=\"text-gray-800\">IT Full Stack Engineer at Manulife</strong>. Previously served as <strong class=\"text-gray-800\">Senior Developer at PT Adicipta Inovasi Teknologi</strong>, <strong class=\"text-gray-800\">Software Developer at Bank OCBC NISP</strong>, <strong class=\"text-gray-800\">Web Developer at Morning Glory Enterprise</strong>, and <strong class=\"text-gray-800\">Junior Backend Developer at PT Drago Kreatifindo</strong>."
+  },
+  "about.p2": {
+    "id": "Mahir dalam pengembangan backend dengan <strong>.NET (C#, VB), Laravel, CodeIgniter</strong>, dan frontend modern dengan <strong>Angular, JavaScript, TypeScript</strong>. Berpengalaman dengan <strong>Apache Kafka, RabbitMQ</strong> untuk message brokering dan <strong>Camunda</strong> untuk otomatisasi proses bisnis. Terampil dalam <strong>PostgreSQL, SQL Server, MySQL, Oracle</strong> untuk manajemen database. Nyaman dengan <strong>arsitektur microservices</strong> dan integrasi sistem pihak ketiga dalam proyek nasional skala besar.",
+    "en": "Proficient in backend development with <strong>.NET (C#, VB), Laravel, CodeIgniter</strong>, and modern frontend with <strong>Angular, JavaScript, TypeScript</strong>. Experienced with <strong>Apache Kafka, RabbitMQ</strong> for message brokering and <strong>Camunda</strong> for business process automation. Skilled in <strong>PostgreSQL, SQL Server, MySQL, Oracle</strong> for database management. Comfortable with <strong>microservices architecture</strong> and third-party system integrations in large-scale national projects."
+  },
+  "about.years": {
+    "id": "Thn Pengalaman",
+    "en": "Years Exp"
+  },
+  "about.companies": {
+    "id": "Perusahaan",
+    "en": "Companies"
+  },
+  "about.projects": {
+    "id": "Proyek",
+    "en": "Projects"
+  },
+  "about.tech": {
+    "id": "Teknologi",
+    "en": "Technologies"
+  },
+  "skills.label": {
+    "id": "Keahlian",
+    "en": "Skills"
+  },
+  "skills.title": {
+    "id": "Tech Stack",
+    "en": "Tech Stack"
+  },
+  "skills.desc": {
+    "id": "Teknologi yang saya gunakan sehari-hari",
+    "en": "Technologies I work with on a daily basis"
+  },
+  "skills.backend": {
+    "id": "Backend",
+    "en": "Backend"
+  },
+  "skills.frontend": {
+    "id": "Frontend",
+    "en": "Frontend"
+  },
+  "skills.tools": {
+    "id": "Tools",
+    "en": "Tools"
+  },
+  "exp.label": {
+    "id": "Pengalaman",
+    "en": "Experience"
+  },
+  "exp.title": {
+    "id": "Riwayat Pekerjaan",
+    "en": "Work History"
+  },
+  "exp.desc": {
+    "id": "Perjalanan profesional saya",
+    "en": "My professional journey"
+  },
+  "exp.dl": {
+    "id": "Unduh CV",
+    "en": "Download CV"
+  },
+  "proj.label": {
+    "id": "Proyek",
+    "en": "Projects"
+  },
+  "proj.title": {
+    "id": "Karya Unggulan",
+    "en": "Featured Work"
+  },
+  "proj.desc": {
+    "id": "Proyek yang telah saya bangun",
+    "en": "Projects I've built and contributed to"
+  },
+  "proj.live": {
+    "id": "Demo Langsung",
+    "en": "Live Demo"
+  },
+  "contact.label": {
+    "id": "Kontak",
+    "en": "Contact"
+  },
+  "contact.title": {
+    "id": "Mari Bekerja Sama",
+    "en": "Let's Work Together"
+  },
+  "contact.desc": {
+    "id": "Punya proyek atau hanya ingin ngobrol? Jangan ragu untuk menghubungi!",
+    "en": "Have a project in mind or just want to chat? Feel free to reach out!"
+  },
+  "proj.sweetbake.title": {
+    "id": "SweetBake",
+    "en": "SweetBake"
+  },
+  "proj.sweetbake.badge": {
+    "id": "Toko Kue Online",
+    "en": "Cake Store"
+  },
+  "proj.sweetbake.desc": {
+    "id": "Toko kue online dengan katalog produk, integrasi WhatsApp untuk pemesanan, dan desain responsif mobile-friendly.",
+    "en": "Online cake store with product catalog, WhatsApp ordering integration, and responsive mobile-friendly design."
+  },
+  "exp.adins.company": {
+    "id": "PT ADINS",
+    "en": "PT ADINS"
+  },
+  "exp.ocbc.d5": {
+    "id": "Bekerja dengan Apache Kafka sebagai message broker",
+    "en": "Worked with Apache Kafka as message broker"
+  },
+  "exp.manulife.date": {
+    "id": "Jun 2025 - Sekarang",
+    "en": "Jun 2025 - Present"
+  },
+  "exp.drago.title": {
+    "id": "Junior Backend Developer",
+    "en": "Junior Backend Developer"
+  },
+  "exp.manulife.company": {
+    "id": "Manulife Indonesia",
+    "en": "Manulife Indonesia"
+  },
+  "exp.ocbc.d4": {
+    "id": "Menggunakan .NET (C#, ASP.NET Core, Web API), Angular, SQL Server",
+    "en": "Used .NET (C#, ASP.NET Core, Web API), Angular, SQL Server"
+  },
+  "exp.drago.company": {
+    "id": "PT Drago Kreatifindo",
+    "en": "PT Drago Kreatifindo"
+  },
+  "exp.mge.d1": {
+    "id": "Berkolaborasi dengan tim untuk testing dan refinement aplikasi",
+    "en": "Collaborated with team on testing and application refinement"
+  },
+  "exp.ocbc.d3": {
+    "id": "Optimasi SQL query, debugging environment development & production",
+    "en": "Optimized SQL queries, debugged dev & production environments"
+  },
+  "exp.adins.d5": {
+    "id": "Integrasi sistem pihak ketiga: Asuransi Sinarmas, KBRU, PT Delima, Softphone",
+    "en": "Third-party integration: Asuransi Sinarmas, KBRU, PT Delima, Softphone"
+  },
+  "exp.mge.company": {
+    "id": "Morning Glory Enterprise",
+    "en": "Morning Glory Enterprise"
+  },
+  "exp.adins.title": {
+    "id": "Senior Software Developer",
+    "en": "Senior Software Developer"
+  },
+  "exp.ocbc.company": {
+    "id": "Bank OCBC NISP",
+    "en": "Bank OCBC NISP"
+  },
+  "exp.ocbc.title": {
+    "id": "Software Developer",
+    "en": "Software Developer"
+  },
+  "exp.mge.date": {
+    "id": "Nov 2020 - Feb 2021",
+    "en": "Nov 2020 - Feb 2021"
+  },
+  "exp.adins.d2": {
+    "id": "Mengawasi proses development dan memastikan milestone tercapai tepat waktu",
+    "en": "Supervised development processes, ensured milestones met on time"
+  },
+  "exp.ocbc.d1": {
+    "id": "Mengembangkan 6+ proyek internal dengan arsitektur microservices",
+    "en": "Developed 6+ internal projects using microservices architecture"
+  },
+  "exp.mge.d4": {
+    "id": "Mengidentifikasi dan memperbaiki bug selama development",
+    "en": "Identified and resolved bugs during development"
+  },
+  "exp.adins.date": {
+    "id": "Jun 2024 - Jun 2025",
+    "en": "Jun 2024 - Jun 2025"
+  },
+  "exp.adins.d1": {
+    "id": "Berkontribusi pada proyek Hyundai Capital: AMS & CMS",
+    "en": "Contributed to Hyundai Capital project: AMS & CMS"
+  },
+  "exp.drago.d3": {
+    "id": "Mengembangkan REST API untuk aplikasi mobile dan web",
+    "en": "Developed REST APIs for mobile and web apps"
+  },
+  "exp.ocbc.date": {
+    "id": "Mei 2022 - Mei 2024",
+    "en": "May 2022 - May 2024"
+  },
+  "exp.manulife.title": {
+    "id": "IT Full Stack Engineer",
+    "en": "IT Full Stack Engineer"
+  },
+  "exp.manulife.d1": {
+    "id": "Mengembangkan dan memelihara aplikasi internal perusahaan",
+    "en": "Develop and maintain internal company applications"
+  },
+  "exp.mge.title": {
+    "id": "Web Programmer",
+    "en": "Web Programmer"
+  },
+  "exp.manulife.d2": {
+    "id": "Berkolaborasi dengan tim lintas fungsi untuk pengembangan fitur baru",
+    "en": "Collaborate with cross-functional teams on new feature development"
+  },
+  "exp.mge.d2": {
+    "id": "Mengembangkan frontend responsif berdasarkan UI/UX design",
+    "en": "Developed responsive frontend based on UI/UX designs"
+  },
+  "exp.drago.d2": {
+    "id": "Memantau performa aplikasi dan memperbaiki bug",
+    "en": "Monitored app performance and fixed bugs"
+  },
+  "exp.adins.d3": {
+    "id": "Menggunakan .NET untuk backend, Angular untuk frontend, PostgreSQL untuk database",
+    "en": "Used .NET for backend, Angular for frontend, PostgreSQL for database"
+  },
+  "exp.mge.d3": {
+    "id": "Mendesain dan menstruktur skema database",
+    "en": "Designed and structured database schemas"
+  },
+  "exp.adins.d4": {
+    "id": "Mengimplementasikan RabbitMQ untuk message queueing dan Camunda untuk otomatisasi proses",
+    "en": "Implemented RabbitMQ for message queueing and Camunda for process automation"
+  },
+  "exp.drago.d1": {
+    "id": "Membantu senior backend developer membangun dan memelihara aplikasi web",
+    "en": "Assisted senior backend developers in building web applications"
+  },
+  "exp.drago.d4": {
+    "id": "Membangun sistem menggunakan PHP Laravel dan MySQL",
+    "en": "Built systems using PHP Laravel and MySQL"
+  },
+  "exp.drago.date": {
+    "id": "Agu 2019 - Agu 2020",
+    "en": "Aug 2019 - Aug 2020"
+  },
+  "exp.ocbc.d2": {
+    "id": "Membuat test scenario, SIT, dan memimpin UAT",
+    "en": "Created test scenarios, SIT, and led UAT"
+  },
+  "proj.lab.title": {
+    "id": "Lab Equipment Borrowing",
+    "en": "Lab Equipment Borrowing"
+  },
+  "proj.lab.desc": {
+    "id": "Sistem peminjaman alat laboratorium berbasis web dengan manajemen pengguna, role-based access, dan tracking peminjaman real-time menggunakan Laravel + PostgreSQL.",
+    "en": "Web-based lab equipment borrowing system with user management, role-based access, and real-time borrowing tracking using Laravel + PostgreSQL."
+  },
+  "proj.lab.badge": {
+    "id": "In Progress",
+    "en": "In Progress"
+  },
+  "proj.company.title": {
+    "id": "Company Profile",
+    "en": "Company Profile"
+  },
+  "proj.company.desc": {
+    "id": "Company profile website responsif dengan desain modern, menampilkan layanan, portofolio, dan informasi kontak. Dibangun dengan HTML, Tailwind CSS, dan Alpine.js.",
+    "en": "Responsive company profile website with modern design, showcasing services, portfolio, and contact info. Built with HTML, Tailwind CSS, and Alpine.js."
+  },
+  "proj.company.badge": {
+    "id": "Selesai",
+    "en": "Done"
+  },
+  "proj.desadigital.title": {
+    "id": "DesaDigital v2",
+    "en": "DesaDigital v2"
+  },
+  "proj.desadigital.desc": {
+    "id": "Platform digital desa dengan fitur berita, pengaduan, manajemen surat, dan peta desa. Sistem berbasis Laravel + MySQL dengan middleware admin dan autentikasi multi-level.",
+    "en": "Village digital platform with news, complaints, letter management, and village map. Laravel + MySQL based system with admin middleware and multi-level authentication."
+  },
+  "proj.desadigital.badge": {
+    "id": "Selesai",
+    "en": "Done"
+  },
+  "proj.pos.title": {
+    "id": "POS System",
+    "en": "POS System"
+  },
+  "proj.pos.desc": {
+    "id": "Sistem Point of Sales untuk kasir dengan manajemen produk, transaksi, dan laporan keuangan. Dibangun dengan Laravel + MySQL, dilengkapi fitur cetak struk dan dashboard analitik.",
+    "en": "Point of Sales system for cashier with product management, transactions, and financial reporting. Built with Laravel + MySQL, includes receipt printing and analytics dashboard."
+  },
+  "proj.pos.badge": {
+    "id": "Selesai",
+    "en": "Done"
+  },
+  "proj.landing.title": {
+    "id": "Landing Page",
+    "en": "Landing Page"
+  },
+  "proj.landing.desc": {
+    "id": "Landing page modern dan responsif untuk personal branding dengan desain clean, animasi halus, dan optimalisasi performa. Dibangun dengan HTML, Tailwind CSS, dan Alpine.js.",
+    "en": "Modern responsive landing page for personal branding with clean design, smooth animations, and performance optimization. Built with HTML, Tailwind CSS, and Alpine.js."
+  },
+  "proj.landing.badge": {
+    "id": "Selesai",
+    "en": "Done"
+  }
+}

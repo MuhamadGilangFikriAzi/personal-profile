@@ -1,0 +1,12 @@
+✅ **Portfolio bilingual (ID/EN) selesai!**
+
+Akses: https://gilang.novasistem.cloud/
+
+**Yang berubah:**
+- Tombol **ID / EN** di pojok kanan atas (fixed)
+- Default **ID** (Indonesia)
+- Semua konten: Hero, About, Skills, Experience, Projects, Contact
+- Tau bahasa dari **LocalStorage** — buka tutup tab tetap inget
+- Pake Alpine.js `$t()` magic — ganti bahasa instan, ga perlu reload
+
+**Coba langsung dari HP:** buka `gilang.novasistem.cloud`, klik EN ➡ semua jadi Inggris, klik ID ➡ balik Indonesia 🎉

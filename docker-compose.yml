@@ -1,0 +1,7 @@
+services:
+  profile:
+    build: .
+    container_name: personal-profile
+    ports:
+      - "8085:80"
+    restart: unless-stopped
