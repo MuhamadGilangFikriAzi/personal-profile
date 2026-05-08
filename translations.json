@@ -354,5 +354,25 @@
   "proj.landing.badge": {
     "id": "Selesai",
     "en": "Done"
+  },
+  "contact.email": {
+    "id": "mgfa9802@gmail.com",
+    "en": "mgfa9802@gmail.com"
+  },
+  "contact.linkedin": {
+    "id": "LinkedIn",
+    "en": "LinkedIn"
+  },
+  "contact.location": {
+    "id": "Jakarta, Indonesia",
+    "en": "Jakarta, Indonesia"
+  },
+  "contact.conn": {
+    "id": "Hubungi Saya",
+    "en": "Get In Touch"
+  },
+  "contact.locdetail": {
+    "id": "Jakarta, Indonesia",
+    "en": "Jakarta, Indonesia"
   }
 }
